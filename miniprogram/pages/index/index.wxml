@@ -1,0 +1,43 @@
+<view class="header_bg">
+  <swiper indicator-dots indicator-color="rgba(255,255,255,0.5)"
+   indicator-active-color="#fff" circular autoplay interval="4000">
+    <swiper-item>
+      <image src="//img.cdn.wepingon.cn/bsImg/1.jpg"  class="swImg" style="width: 100%;" />
+    </swiper-item>
+    <swiper-item>
+      <image src="//img.cdn.wepingon.cn/bsImg/2.jpg"  style="width: 100%;" />
+    </swiper-item>
+    <swiper-item>
+      <image src="//img.cdn.wepingon.cn/bsImg/3.jpg" style="width: 100%;" />
+    </swiper-item>
+   </swiper>
+</view>
+<view class="goods_bg" >
+  <view class="title">
+    <span>精选商品</span>
+  </view>
+  <view class="none_goods" wx:if="{{noneGoodsFlag}}">
+    <span>目前没有在售商品</span>
+  </view>
+  <view class="goods_box" wx:if="{{!noneGoodsFlag}}" wx:for="{{indexGoodsList}}">
+    <view class="single_good">
+      <view class="title">
+        <span>· {{item.MbsystemName}} 正在直播售卖的商品</span>
+      </view>
+      <view class="goods_sg_box">
+        <view class="img_box">
+          <image src='{{item.imgUrl}}'></image>
+        </view>
+        <view class="information_box">
+          <view class="title">
+            <span>{{item.goodTitle}}</span>
+          </view>
+          <view class="amount_box">
+            <span class="amount"><span class="amountIcon_class">¥</span> {{item.amount}} </span>
+            <span class="orderButton" data-roomid="{{item.roomId}}" bind:tap="enterLiveRoom">进入直播间</span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

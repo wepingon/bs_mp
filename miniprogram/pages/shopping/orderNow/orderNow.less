@@ -1,0 +1,187 @@
+.crowded_bg{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(207, 207, 207, 0.438);
+}
+.crowded_box{
+  border-radius: 10px;
+  box-shadow: 0 0 10px;
+  padding: 30px;
+  background-color: white;
+}
+.crowded_box > .title{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0 30px 0;
+}
+.crowded_box > .text{
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+}
+.crowded_box > .button_box{
+  margin: 30px 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+.crowded_box > .button_box > .button{
+  padding: 5px 10px;
+  border: 1px solid rgb(248, 100, 100);
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: rgba(248, 186, 197, 0.541);
+  border-radius: 20px;
+}
+.header_address{
+  border: 1px solid black;
+}
+.header_address > .title {
+  padding: 5px ;
+  font-weight: bold;
+  font-size: 18px;
+}
+.single_box{
+  border: 1px solid black;
+  padding: 10px 0 0 10px;
+  margin-bottom: 10px;
+}
+.single_box > .buyer{
+  font-weight: bold;
+  padding: 5px 0;
+}
+.single_box > .address{
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid grey;
+  padding: 5px 0;
+
+}
+.single_box > .address >span{
+  padding: 2px 0;
+}
+.single_box > .address > .text{
+  font-size: 18px ;
+  font-weight: bold ;
+  color: grey ;
+}
+.single_box > .editAddress{
+  font-size: 15px;
+  font-weight: bold;
+  color: red;
+  margin: 3px 0;
+}
+
+.goods_box{
+  border-bottom: 1px solid black;
+  height: auto;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  
+}
+.goods_box.cannotbuy{
+  background-color: rgba(75, 73, 73, 0.281);
+}
+.goods_box > .cannotBuy_box{
+  font-size: 13px;
+  color: red;
+  font-weight: bold;
+}
+.goods_box.click{
+  background-color: lightgray;
+}
+.goods_box > .title{
+  font-weight: bold;
+  color: rgb(112, 107, 107);
+  font-size: 15px;
+  text-decoration: underline;
+}
+.goods_box > .inf{
+  display: flex;
+
+}
+.goods_box > .inf > .img_box{
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.goods_box > .inf > .information_box{
+  flex-shrink: 0;
+  margin-left: 15px;
+  width: 60vw;
+}
+.goods_box > .inf > .img_box > image{
+  width: 25vw;
+  height: 10vh;
+}
+.goods_box > .inf > .information_box > view{
+  margin: 10px 0;
+}
+.goods_box > .inf > .information_box > .amount_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.goods_box > .inf > .information_box > .amount_box >  .amount >.amountIcon_class{
+  color: red;
+  font-size: 25px;
+}
+
+.goods_box > .inf  > .information_box > .amount_box >   .inventory{
+  font-size: 13px;
+}
+
+.buy_box{
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 10px 0 ;
+  position: fixed;
+  right: 0;
+  width: 100%;
+  bottom:0;
+  display:flex;
+  justify-content: flex-end;
+}
+
+.buy_box > .buy_button_box{
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: 1px solid orange;
+  background-color: rgb(250, 203, 117);
+  border-radius: 20px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+}
+.buy_box > .quantity_box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+.buy_box > .quantity_box > .reduce {
+  padding: 5px 10px;
+}
+.buy_box > .quantity_box > .quantity {
+  padding: 5px 10px;
+}
+.buy_box > .quantity_box > .add {
+  padding: 5px 10px;
+}

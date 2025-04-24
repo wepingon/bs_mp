@@ -1,0 +1,25 @@
+<view class="register_box">
+  <view class="zj_box">
+    <view class="title">
+      <span>你还没有注册账户，请填写以下信息进行注册</span>
+    </view>
+    <view class="userName">
+      <span class="user">
+        <span class="">用户名：</span>
+        <input type="text" placeholder="请填写用户名" model:value="{{userName}}"  type="nickname"/>
+      </span>
+     <span class="saler">
+      <checkbox model:checked="{{isSaler}}"/><span>同时注册为卖家</span>
+     </span>
+    </view>
+    <view class="function_box" >
+      <view class="button_box" bind:tap="reptLoginPage">
+        <span>返回登录页面</span>
+      </view>
+      <view class="button_box" bind:tap="registerUser">
+        <span>注册</span>
+      </view>
+      
+    </view>
+  </view>
+</view>

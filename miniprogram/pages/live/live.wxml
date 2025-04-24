@@ -1,0 +1,38 @@
+<view class="box">
+  <view class="liveRoom_box" wx:for="{{liveRoomList}}">
+    <view class="title">
+      <span>{{item.roomName}}</span>
+    </view>
+    <view class="userName">
+      <span>{{item.MbsystemName}}的直播间</span>
+    </view>
+    <view class="status">
+        <view class="{{item.isLive == 1 ? 'liveStuatus startLive' :  'liveStuatus stopLive'}}">
+          <span>{{item.isLive == 1 ? "· 直播中":"· 未开播"}}</span>
+        </view>
+        <view class="button_box" >
+          <view class="button" bind:tap="reptLiveRoom" data-roomid="{{item.roomId}}">
+            <span>进入直播间</span>
+          </view>
+        </view>
+    </view>
+  </view>
+  <!-- <view class="liveRoom_box">
+    <view class="title">
+      <span>测试直播间</span>
+    </view>
+    <view class="userName">
+      <span>wepingon的直播间</span>
+    </view>
+    <view class="status">
+        <view class="liveStuatus">
+          <span>· 直播中</span>
+        </view>
+        <view class="button_box">
+          <view class="button" bind:tap="reptLiveRoom">
+            <span>进入直播间</span>
+          </view>
+        </view>
+    </view>
+  </view> -->
+</view>

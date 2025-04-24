@@ -1,0 +1,60 @@
+<view class="bg">
+  <view class="goods_cart_box">
+    <view class="{{choiceIndexFlag == item.goodNum ? 'goods_box click':'goods_box'}}" bind:tap="clickGoods" wx:for="{{cart_list}}"  data-goodnum="{{item.goodNum}}" data-inventory="{{item.inventory}}" data-isbuy="{{item.isBuy}}">
+      <view class="title">
+        <span>{{item.businessName}} </span>
+      </view>
+      <view class="cannotBuy_box" wx:if="{{(item.isBuy == 0 || item.inventory <= 0 )}}">
+        <span>此商品目前已下架或缺货，暂时无法购买。</span>
+      </view>
+      <view class="inf">
+        <view class="img_box">
+        <image src='{{item.imgUrl}}'></image>
+      </view>
+        <view class="information_box">
+          <view class="title">
+            <span>{{item.goodTitle}}</span>
+          </view>
+          <view class="amount_box">
+            <span class="amount"><span class="amountIcon_class">¥</span> {{item.amount}} </span>
+            <span class="inventory">库存：{{item.inventory}}</span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+    
+  <view class="buy_box" wx:if="{{cart_list.length >= 1}}">
+    <view class="quantity_box">
+      <view class="reduce" bind:tap="goodQuantityChange" data-tag="0">
+        <span>-</span>
+      </view>
+      <view class="quantity">
+        <span >{{goodQuantity}}</span>
+      </view>
+      <view class="add" bind:tap="goodQuantityChange" data-tag="1">
+        <span>+</span>
+      </view>
+    </view>
+    <view class="buy_button_box" bind:tap="goBuy">
+      <span>购买</span>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- <view class="goods_box"  bind:tap="clickGoods" data-goodnum="10001">
+  <view class="img_box">
+    <image src='/images/shoppingMart.png'></image>
+  </view>
+  <view class="information_box">
+    <view class="title">
+      <span>商品测试商品测试商品测试商品测试</span>
+    </view>
+    <view class="amount">
+      <span>¥ 19.00 </span>
+      <span>商品标号：10002</span>
+    </view>
+  </view>
+</view> -->

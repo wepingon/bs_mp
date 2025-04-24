@@ -1,0 +1,110 @@
+/* pages/shopping/mall/mall.wxss */
+.goods_box{
+  border-bottom: 1px solid black;
+  height: auto;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.bg{
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.goods_cart_box{
+  overflow:scroll;
+  width: 100%;
+}
+.goods_box > .cannotBuy_box{
+  font-size: 13px;
+  color: red;
+  font-weight: bold;
+}
+.goods_box.click{
+  background-color: lightgray;
+}
+.goods_box > .title{
+  font-weight: bold;
+  color: rgb(112, 107, 107);
+  font-size: 15px;
+  text-decoration: underline;
+}
+.goods_box > .inf{
+  display: flex;
+
+}
+.goods_box > .inf > .img_box{
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.goods_box > .inf > .information_box{
+  flex-shrink: 0;
+  margin-left: 15px;
+  width: 60vw;
+}
+.goods_box > .inf > .img_box > image{
+  width: 25vw;
+  height: 10vh;
+}
+.goods_box > .inf > .information_box > view{
+  margin: 10px 0;
+}
+.goods_box > .inf > .information_box > .amount_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.goods_box > .inf > .information_box > .amount_box >  .amount >.amountIcon_class{
+  color: red;
+  font-size: 25px;
+}
+
+.goods_box > .inf  > .information_box > .amount_box >   .inventory{
+  font-size: 13px;
+}
+
+.buy_box{
+  background-color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 10px 0 ;
+  width: 100%;
+  display:flex;
+  justify-content: flex-end;
+}
+
+.buy_box > .buy_button_box{
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: 1px solid orange;
+  background-color: rgb(250, 203, 117);
+  border-radius: 20px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+}
+.buy_box > .quantity_box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+.buy_box > .quantity_box > .reduce {
+  padding: 5px 10px;
+}
+.buy_box > .quantity_box > .quantity {
+  padding: 5px 10px;
+}
+.buy_box > .quantity_box > .add {
+  padding: 5px 10px;
+}

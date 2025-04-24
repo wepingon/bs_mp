@@ -1,0 +1,169 @@
+/* pages/userInf/userInf.wxss */
+.userInf_box{
+  width: 100vw;
+}
+.userInf_box > .exchange_box{
+  display: flex;
+  padding: 5px 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(218, 218, 218);
+}
+.userInf_box > .exchange_box > .text{
+  font-weight: bold;
+}
+.userInf_box > .exchange_box > .exchange_button {
+  display: flex;
+  flex-direction: row;
+}
+.userInf_box > .exchange_box > .exchange_button > .box{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 0 3px;
+  padding: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.userInf_box > .exchange_box > .exchange_button > .box.active{
+  background-color: rgb(161, 215, 247);
+}
+.user_login_box{
+  padding: 10px 0;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(241, 239, 239);
+}
+.user_img_box{
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+.user_img_box > image{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.login_text{
+  margin: 0 0 0 30px;
+  width: 230px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.login_text > .welcome_text{
+  font-size: 17px;
+}
+.login_text > .address_box{
+  font-size: 13px;
+  color: grey;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.login_text > .address_box.vis{
+  visibility: hidden;
+}
+.login_text > .address_box > image{
+  width: 18px;
+  height: 18px;
+}
+
+.login_text > p {
+  font-size: 14px;
+  font-weight: bold;
+}
+.login_text > .content{
+  font-size: 12px;
+  font-weight: bold;
+}
+.account_box{
+  height: auto;
+}
+.account_box > .banner_box{
+  padding: 10px;
+  background-color: rgb(226, 226, 226);
+}
+.banner_box > .button_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.banner_box > .button_box:nth-child(1){
+}
+
+.banner_box > .button_box > .single_box{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  position: relative;
+  
+}
+.banner_box > .button_box > .single_box > .number_box{
+  position: absolute;
+  top: -7px;
+  left: 17px;
+  background-color: red;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+}
+.banner_box > .button_box > .single_box > image{
+    width: 25px;
+    height: 25px;
+    margin-bottom: 3px;
+}
+.banner_box > .button_box > .single_box > span{
+  font-size: 13px;
+  font-weight: bold;
+}
+.function_box > .button_box{
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+.function_box > .button_box > p {
+  font-size: 15px;
+}
+.function_box > .button_box > image{
+  width: 33px;
+  height: 33px;
+  margin-left: 10px;
+}
+.function_box > .button_box > p {
+  margin-left: 10px;
+}
+.footer_box{
+  width: 100vw;
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  padding: 5px 0;
+}
+.footer_box > span{
+  width: auto;
+  font-size: 12px;
+  color: grey;
+  padding: 2px 0;
+}
+//
+.booking_box{
+  background-color: rgb(235, 163, 163);
+  padding: 15px 10px;
+  outline: 1px solid black;
+  font-weight: bold;
+}

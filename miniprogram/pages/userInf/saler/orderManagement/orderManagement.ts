@@ -1,0 +1,292 @@
+// pages/userInf/saler/orderManagement/orderManagement.ts
+Component({
+
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    isSeller:false,
+    orderList:[],
+    expressCompanyList:['顺丰速运','圆通快递','中通快递','韵达快递','申通快递','极兔快递','京东快递','其他快递公司'],
+    sellerOrder:'',
+    sellerCompany:'请选择快递公司', 
+    sellerId:''
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    onShow:function(){
+      this.manOrder();
+    },
+    manOrder(){
+      wx.showLoading({
+        title:"获取数据中..."
+      })
+      wx.login({
+        success:(res)=>{
+          wx.request({
+            url:"https://api.wepingon.cn:3000/bs/live/manOrder",
+            method:"POST",
+            data:{
+              code:res.code
+            },
+            success:(res)=>{
+              if(res.data.code == 200){
+                wx.showToast({
+                  title:'获取成功',
+                  icon:"success",
+                  duration:1500
+                });
+                this.setData({
+                  orderList:res.data.result.orderList
+                })
+              }else{
+                wx.showToast({
+                  title:'请求失败',
+                  icon:"error",
+                  duration:1500
+                })
+              }
+
+            },
+            fail:(res)=>{
+              wx.showToast({
+                title:'请求失败',
+                icon:"error",
+                duration:1500
+              })
+            }
+          })
+        },
+        fail:(res)=>{
+          wx.showToast({
+            title:'请求失败',
+            icon:"error",
+            duration:1500
+          })
+        }
+      })
+    },
+    closeOrder(e){
+      wx.showModal({
+        title:'取消订单',
+        content:"你确定要取消订单吗",
+        success:(res)=>{
+          if(res.confirm){
+            wx.showLoading({
+              title:'取消订单中'
+            })
+            let orderNo = e.currentTarget.dataset.orderno;
+            wx.login({
+              success:(res)=>{
+                wx.request({
+                  url:"https://api.wepingon.cn:3000/bs/pay/wechatMpPayCloseOrder",
+                  method:"POST",
+                  data:{
+                    code:res.code,
+                    orderNo:orderNo
+                  },
+                  success:(res)=>{
+                    if(res.data.code == 200){
+                      wx.showToast({
+                        title:"取消订单成功",
+                        icon:"success",
+                        duration:1500
+                      });
+                      setTimeout(()=>{this.manOrder()},2000);
+                    }else{
+                      wx.showToast({
+                        title:"取消失败",
+                        icon:"error",
+                        duration:1500
+                      })
+                    }
+                  },
+                  fail:(res)=>{
+                    wx.showToast({
+                      title:"取消失败",
+                      icon:"error",
+                      duration:1500
+                    })
+                  }
+                })
+              },
+              fail:(res)=>{
+                wx.showToast({
+                  title:"取消失败",
+                  icon:"error",
+                  duration:1500
+                })
+              }
+            })
+          }
+        }
+      })
+    },
+    refundOrder(e){
+      wx.showModal({
+        title:'退款',
+        content:'你确定要退款此订单吗？',
+        success:(res)=>{
+          let orderNo = e.currentTarget.dataset.orderno;
+          if(res.confirm){
+            wx.showLoading({
+              title:'退款中'
+            });
+            wx.login({
+              success:(res)=>{
+                wx.request({
+                  url:"https://api.wepingon.cn:3000/bs/pay/wechatMpPayRefundOrder",
+                  method:"POST",
+                  data:{
+                    code:res.code,
+                    orderNo:orderNo
+                  },
+                  success:(res)=>{
+                    if(res.data.code == 200){
+                      wx.showToast({
+                        title:'退款成功',
+                        icon:"success",
+                        duration:1500
+                      });
+                      setTimeout(()=>{this.manOrder()},2000);
+                    }else{
+                      wx.showToast({
+                        title:'退款失败',
+                        icon:"error",
+                        duration:1500
+                      });
+                        wx.request({
+                          url:'https://api.wepingon.cn:3000/bs/pay/wechatMpPaySearchOrder',
+                          method:"POST",
+                          data:{
+                            orderNo:orderNo
+                          },
+                          success:(res)=>{
+                            console.log('update order->',res.data);
+                          }
+                        })
+                        setTimeout(()=>{this.manOrder()},2000);
+                    }
+                  },
+                  fail:(res)=>{
+                    wx.showToast({
+                      title:'退款失败',
+                      icon:"error",
+                      duration:1500
+                    });
+                  }
+                })
+              },
+              fail:(res)=>{
+                wx.showToast({
+                  title:'退款失败',
+                  icon:"error",
+                  duration:1500
+                });
+              }
+            })
+          }
+        }
+      })
+    },
+    bindPickerChange(e){
+      console.log('e->',e.detail.value);
+      this.setData({
+        sellerCompany: this.data.expressCompanyList[e.detail.value]
+      })
+    },
+    sellerOrder(){
+      if( this.data.sellerOrder == '' || 
+      this.data.sellerCompany == '请选择快递公司'||
+      this.data.sellerId == ''){
+        wx.showToast({
+          title:'请完善发货信息',
+          icon:'error',
+          duration:1000,
+          mask:true
+        })
+        return false
+      }
+      wx.showLoading({
+        title:"发货中..."
+      })
+      wx.login({
+        success:(res)=>{
+          wx.request({
+            url:"https://api.wepingon.cn:3000/bs/pay/sellOrder",
+            method:"POST",
+            data:{
+              code:res.code,
+              sellerOrder:this.data.sellerOrder,
+              sellerCompany:this.data.sellerCompany,
+              sellerId:this.data.sellerId
+            },
+            success:(res)=>{
+              if(res.data.code == 200){
+                wx.showToast({
+                  title:'发货成功',
+                  icon:"success",
+                  duration:1000
+                });
+                this.setData({
+                  isSeller:false,
+                  sellerOrder:'',
+                  sellerCompany:'', 
+                  sellerId:''
+                })
+                setTimeout(() => {
+                  this.manOrder();
+                }, 1000);
+              }else{
+                wx.showToast({
+                  title:'发货成功',
+                  icon:"error",
+                  duration:1500
+                })
+              }
+            },
+            fail:(res)=>{
+              wx.showToast({
+                title:'发货成功',
+                icon:"error",
+                duration:1500
+              })
+            }
+          })
+        },
+        fail:(res)=>{
+          wx.showToast({
+            title:'发货成功',
+            icon:"error",
+            duration:1500
+          })
+        }
+      })
+    },
+    cancelSeller(){
+      this.setData({
+        isSeller:false,
+        sellerOrder:'',
+        sellerCompany:'', 
+        sellerId:''
+      })
+    },
+    callSeller(e){
+      let orderNo = e.currentTarget.dataset.orderno;
+      this.setData({
+        sellerOrder:orderNo,
+        isSeller:true
+      })
+    }
+  }
+})

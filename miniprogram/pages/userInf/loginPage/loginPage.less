@@ -1,0 +1,86 @@
+/* pages/userInf/loginPage/loginPage.wxss */
+.login_box{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.welcome_Box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 20px 0;
+}
+
+.welcome_Box > .logo_box > image{
+  width: 90px;
+  height: 90px;
+  border-radius: 60px;
+}
+.welcome_Box > .logo_box{
+  width: 90px;
+  height: 90px;
+  box-shadow: 0 0 3px;
+  margin-bottom: 10px;
+  border-radius: 60px;
+}
+.welcome_Box > .text_box{
+  font-size: 20px;
+  font-weight: bold;
+}
+//
+.login_button_box{
+  padding: 10px;
+}
+.login_button_box > .single_box{
+  position: relative;
+  margin: 30px 20px;
+}
+.login_button_box > .single_box > button{
+  
+  width: 250px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(169, 211, 248);
+}
+.login_button_box > .single_box > .recommend{
+  color: rgb(255, 250, 250);
+  position: absolute;
+  z-index: 99;
+  font-size: 13px;
+  background: -webkit-linear-gradient(left,rgb(88, 216, 233),rgb(174, 93, 240));
+  // background-color:rgb(174, 93, 240);
+  padding:5px;
+  font-weight: bold;
+  border-radius: 10px 10px 0 10px;
+  top: -20px;
+  left: -25px;
+}
+.login_button_box > .single_box.xcxOnekey > button{
+  background-color: rgb(255, 214, 81);
+}
+//
+.privacy_box{
+  padding: 10px;
+  width: 300px;
+}
+.privacy_box > .notice{
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  color: red;
+  border: 1px solid red;
+  padding: 20px 10px;
+}
+.privacy_box > .privacy{
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 25px;
+}

@@ -1,0 +1,134 @@
+<!-- <view class="order_box">
+  <view class="status_box">
+    <view class="business_text">
+      <span>小程序官方直营店</span>
+    </view>
+    <view class="status_text">
+      <span>订单已取消</span>
+    </view>
+  </view>
+  <view class="good_box">
+    <view class="img_box">
+      <image src="//img.cdn.wepingon.cn/article/waitingforupdate.png"></image>
+    </view>
+    <view class="information_box">
+      <view class="title_box">
+        <view class="title">
+          <span>第一件商品</span>
+        </view>
+      </view>
+      <view class="quantity_amount_box">
+        <view class="quantity">
+          <span>x1</span>
+        </view>
+        <view class="amount">
+          <span>¥ 99.00</span>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="function_box">
+    <view class="function_button">
+      <span>客服</span>
+    </view>
+    <view class="function_button">
+      <span>付款</span>
+    </view>
+    <view class="function_button">
+      <span>退款</span>
+    </view>
+    <view class="function_button">
+      <span>删除订单</span>
+    </view>
+  </view>
+</view> -->
+
+<view class="order_box" wx:for="{{orderList}}">
+  <view class="status_box">
+    <view class="business_text">
+      <span>{{item.goodInformation.businessName}}</span>
+    </view>
+    <view class="status_text">
+      <span>{{item.orderInformation.orderStatusCn}}</span>
+    </view>
+  </view>
+  <view class="good_box">
+    <view class="img_box">
+      <image src="{{item.goodInformation.goodImg}}"></image>
+    </view>
+    <view class="information_box">
+      <view class="title_box">
+        <view class="title">
+          <span>{{item.goodInformation.goodTitle}}</span>
+        </view>
+      </view>
+      <view class="quantity_amount_box">
+        <view class="quantity">
+          <span>x{{item.goodInformation.quantity}}</span>
+        </view>
+        <view class="amount">
+          <span>¥ {{item.payInformation.amount}}</span>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="other_box">
+    <view class="time_text">
+      <span>订单号：{{item.orderInformation.orderNo}}</span>
+      <span>订单创建时间：{{item.orderInformation.orderTime}}</span>
+      <span wx:if="{{item.payInformation.paySuccessTime != null}}">订单支付时间：{{item.payInformation.paySuccessTime}}</span>
+      <view class="refund_box" wx:if="{{item.refundInformation.isRefund}}">
+        <span>退款凭证：{{item.refundInformation.refundOrderNo}}</span>
+        <span>退款时间：{{item.refundInformation.refundSuccessTime}}</span>
+        <span>退款原因：{{item.refundInformation.refundRemark}}</span>
+        <span>款项会退还到原支付渠道上</span>
+        <span>大概在1-5个工作日内到账</span>
+        <!-- <span>如是支付宝支付，则大概在15个工作日内到账</span> -->
+      </view>
+    </view>
+  </view>
+  <view class="address_box">
+    <view class="title">
+      <span>{{item.addressInformation.addressShipping}} {{item.addressInformation.addressPhoneNumber}}</span>
+    </view>
+    <view class="address">
+      <span class="content">{{item.addressInformation.addressProvince}} {{item.addressInformation.addressCity}} {{item.addressInformation.addressDistrict}}</span>
+      <span class="detail">{{item.addressInformation.addressDetail}}</span>
+    </view>
+    <view class="express" wx:if="{{!item.orderInformation.isCancel && item.orderInformation.isPay}}">
+      <span class="content">{{item.expressInformation.company != null ? item.expressInformation.company:'暂无运单号'}} {{item.expressInformation.id !=null ? item.expressInformation.id:''}}</span>
+    </view>
+    <view class="express_target" wx:if="{{item.expressInformation.company != null }}">
+      <view class="title">
+        <span>快递轨迹跟踪</span>
+      </view>
+      
+      <view class="target_content_box">
+        <span wx:if="{{item.expressInformation.target.State == '0'}}">
+          {{item.expressInformation.target.Reason}}
+        </span>
+        <view class="target_content" wx:for="{{item.expressInformation.target.Traces}}" wx:for-item="itemName">
+          <span>->[{{itemName.Location}}] {{itemName.AcceptStation}}</span>
+          <span class="time">更新时间：{{itemName.AcceptTime}}</span>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="function_box">
+    <!-- <view class="function_button">
+      <span>客服</span>
+    </view> -->
+    <view class="function_button"  data-orderno="{{item.orderInformation.orderNo}}" wx:if="{{!item.orderInformation.isPay && !item.orderInformation.isCancel}}" bind:tap="payOrder">
+      <span>付款</span>
+    </view>
+    <view class="function_button" data-orderno="{{item.orderInformation.orderNo}}" wx:if="{{(item.orderInformation.isPay && !item.orderInformation.isCancel) && item.expressInformation.company == null}}" bind:tap="refundOrder">
+      <span>退款</span>
+    </view>
+    <view class="function_button"  data-orderno="{{item.orderInformation.orderNo}}" wx:if="{{!item.orderInformation.isPay && !item.orderInformation.isCancel}}" bind:tap="closeOrder">
+      <span>取消订单</span>
+    </view>
+    <view class="function_button" data-orderno="{{item.orderInformation.orderNo}}" wx:if="{{(item.orderInformation.isCancel && !item.orderInformation.isPay) || (!item.orderInformation.isPay && item.orderInformation.isCancel) || (item.orderInformation.isPay && item.orderInformation.isCancel)}}" bind:tap="deleteOrder">
+      <span>删除订单</span>
+    </view>
+  </view>
+</view>

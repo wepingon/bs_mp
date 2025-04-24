@@ -1,0 +1,217 @@
+/* pages/userInf/live/live.wxss */
+.liveHeader_box{
+  height: 50px;
+  // outline: 1px solid black;
+  background-color: rgb(231, 230, 230);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+.liveHeader_box > .headerImg_box {
+  height: 100%;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+
+}
+.liveHeader_box > .headerImg_box > image{
+  height: 32px;
+  width: 32px;
+  border-radius: 15px;
+}
+.liveHeader_box > .title_box{
+  margin-left: 10px;
+  font-size: 14px;
+
+}
+.liveHeader_box > .liveStatus_box{
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.liveHeader_box > .liveStatus_box.starLive{
+  color: green;
+}
+.liveHeader_box > .liveStatus_box.stopLive{
+  color: red;
+}
+.video-box{
+  width: 100%;
+  height: 200px;
+  position: sticky;
+  top: 50px;
+}
+.video-box > video{
+  
+  width: 100%;
+  height: 200px;
+}
+.showGood_box > .title_box{
+  padding: 10px 15px; 
+  height: 20px;
+  border-bottom:1px solid black ;
+  font-size: 14px;
+  font-weight: bold;
+  
+  position: sticky;
+  background-color: white;
+  top: 250px;
+}
+.showGood_box > .title_box.starLive{
+  color: green;
+}
+.showGood_box > .title_box.stopLive{
+  color: red;
+}
+.showGood_box > .stopLive_box{
+  padding: 100px 15px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid black;
+}
+//
+//
+.single_good{
+  padding: 0 10px ;
+}
+.single_good:nth-child(2n){
+  background-color: rgb(253, 242, 242);
+}
+.single_good > .goods_status  {
+  font-size: 14px;
+  font-weight:bold;
+  display: flex;
+  flex-direction: column;
+}
+.goods_sg_box{
+  border-bottom: 1px solid black;
+  height: auto;
+  padding: 5px 10px 0px 10px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  
+}
+.goods_box{
+  border-bottom: 1px solid black;
+  height: auto;
+  padding: 5px 0 0px 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  
+}
+.goods_box.click{
+  background-color: lightgray;
+}
+.goods_sg_box > .img_box{
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.goods_sg_box > .information_box{
+  flex-shrink: 0;
+  margin-left: 15px;
+  width: 60vw;
+}
+.goods_sg_box > .img_box > image{
+  width: 25vw;
+  height: 10vh;
+}
+.goods_sg_box > .information_box > .title{
+  font-weight: bold;
+}
+.goods_sg_box > .information_box > view{
+  margin: 10px 0;
+}
+.goods_sg_box > .information_box > .amount_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.goods_sg_box > .information_box > .amount_box >  .amount >.amountIcon_class{
+  color: red;
+  font-size: 25px;
+}
+
+.goods_sg_box > .information_box > .amount_box > .orderButton{
+  font-size: 13px;
+  padding: 5px 10px;
+  border: 1px solid rgb(255, 251, 216);
+  border-radius: 20px;
+  color: black;
+  background-color: rgb(241, 217, 163);
+}
+.exchange_status_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+}
+.exchange_status_box > .e_button{
+  padding: 10px 30px;
+  background-color: rgb(228, 228, 228);
+  border-radius: 10px;
+  border: 1px solid black;
+}
+.exchange_status_box > .e_button.active{
+  background-color: rgb(206, 245, 142);
+}
+.talk_box{
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.talk_box > .gp_box{
+  height: 300px;
+  border-bottom: 1px solid black;
+  overflow-y: scroll;
+}
+.talk_box > .gp_box > .control_float{
+  margin-bottom: 10px;
+}
+.talk_box > .gp_box > .control_float.myComment{
+  display: flex;
+  justify-content: flex-end;
+
+}
+.talk_box > .gp_box > .control_float > .single_comment_box{
+  padding: 5px 5px;
+  border: 1px solid black;
+  width: 200px;
+  border-radius: 15px 15px 15px 0;
+}
+.talk_box > .gp_box > .control_float > .single_comment_box.myComment{
+  border-radius: 15px 15px 0px 15px;
+}
+.talk_box > .gp_box > .control_float > .single_comment_box > .userName{
+  font-size: 16px;
+  font-weight: bold;
+}
+.talk_box > .gp_box > .control_float > .single_comment_box > .content{
+  font-size: 14px;
+}
+.talk_box > .submit_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+.talk_box > .submit_box > .input_box > textarea{
+  border: 1px solid black;
+  height: 25px;
+  width: 250px;
+  line-height: 24px;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+.talk_box > .submit_box > .submit_button{
+  border: 1px solid black;
+  padding: 3px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}

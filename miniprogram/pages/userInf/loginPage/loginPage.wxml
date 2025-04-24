@@ -1,0 +1,25 @@
+<view class="login_box">
+  <view class="welcome_Box">
+    <view class="text_box">
+      <span>欢迎登录</span>
+    </view>
+  </view>
+  <view class="login_button_box" > 
+    
+    <!-- <view class="single_box" id="phoneLogin">
+      <button open-type="getPhoneNumber" bind:tap="reptPhoneMask">手机号登录</button>
+    </view> -->
+    <view class="single_box xcxOnekey" id="onekeyLogin">
+      <span class="recommend">推荐使用</span>
+      <button  bind:tap="onekeyLogin" disabled="{{!privacyCheckedFlag && captchaFlag}}">小程序账号一键登录</button>
+    </view>
+    <!-- <view class="single_box" id="phoneLogin">
+      <button open-type="getPhoneNumber" bindgetphonenumber="phoneNumberLogin" disabled="{{!privacyCheckedFlag && captchaFlag}}">手机号登录</button>
+    </view> -->
+    <!-- <view class="single_box" >
+      <button bind:tap="test">点我进行验证</button>
+    </view> -->
+    <aliyun-captcha id="captcha-element" wx:if="{{loadCaptcha}}" props="{{pluginProps}}" />
+  </view>
+ 
+</view>

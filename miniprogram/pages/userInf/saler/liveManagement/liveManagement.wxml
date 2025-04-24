@@ -1,0 +1,162 @@
+<view class="box">
+  <view class="submitGoods_bg_box" wx:if="{{editGoodsFlag}}">
+    <view class="submitGoods_box">
+      <view class="title">
+        <span>新增/编辑商品</span>
+      </view>
+      <view class="img_box">
+        <image src="{{editGoodsImgUrl}}"></image>
+      </view>
+      <view class="button_box">
+        <button bind:tap="uploadImg">上传图片</button>
+      </view>
+      <view class="content_box">
+        <view class="goodsName_box">
+          <span>商品名：</span>
+          <span><input type="text" model:value="{{editGoodsName}}"/></span>
+        </view>
+        <view class="goodsName_box">
+          <span>价格：</span>
+          <span><input type="text" model:value="{{editGoodsPrice}}"/></span>
+        </view>
+        <view class="goodsName_box">
+          <span>库存：</span>
+          <span><input type="text" model:value="{{editGoodsInventory}}"/></span>
+        </view>
+        <view class="button_box">
+          <button bind:tap="cancelGoodsEdit">取消</button>
+          <button bind:tap="submitGoods">确定</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="order_box">
+    <view class="title">
+      <span>销售数据</span>
+    </view>
+    <view class="information">
+      <!-- <view class="single">
+        <span class="number">0</span>
+        <span class="tect">一天内订单</span>
+      </view> -->
+      <view class="single">
+        <span class="number">{{saleOrder}}</span>
+        <span class="tect">订单在途</span>
+      </view>
+      <view class="single">
+        <span class="number">{{saleAmount}}</span>
+        <span class="tect">销售额</span>
+      </view>
+    </view>
+  </view>
+  <view class="all_goods_box">
+    <view class="title">
+      <span>商品管理</span>
+    </view>
+    <view class="button_box" >
+      <view class="button" bind:tap="addGoods">
+          <span>添加商品</span>
+      </view>
+    </view>
+    <view class="goods_box" >
+
+      <view class="single_good" wx:for="{{sellingGoodsList}}">
+        <view class="goods_status">
+            <span>商品状态：
+              <span style="{{(item.isBuy == 1 && item.inventory > 0 ) ?'':'color:red;'}}" >{{(item.isBuy == 1 && item.inventory > 0 ) ?'在售中':'缺货或已下架'}}</span>
+            </span>
+            <span>库存：
+              <span style="{{(item.isBuy == 1 && item.inventory > 0 ) ? '' :'color:red;'}}" >{{item.inventory}}</span>
+            </span>
+        </view>
+        <view class="goods_sg_box"   >
+          <view class="img_box">
+            <image src='{{item.imgUrl}}'></image>
+          </view>
+          <view class="information_box">
+            <view class="title">
+              <span>{{item.goodTitle}}</span>
+            </view>
+            <view class="amount_box">
+              <span class="amount"><span class="amountIcon_class">¥</span>{{item.amount}} </span>
+              <span class="orderButton" data-goodnum="{{item.goodNum}}" bind:tap="editGoods">修改商品信息</span>
+              <span class="orderButton" data-goodnum="{{item.goodNum}}" data-isbuy="{{item.isBuy}}" bind:tap="conGoods">{{item.isBuy ? '下架':'上架'}}</span>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- <view class="live_man_box">
+    <view class="liveStatus">
+      <view class="status">
+        
+      </view>
+      <view class="button_box">
+      </view>
+    </view>
+  </view> -->
+  <view class="live_man_box">
+    <view class="title">
+      <span>直播间管理</span>
+    </view>
+    <view class="live_header">
+      <view class="title">
+        <span class="liveRoomName_box">直播间名：
+          <span>{{editRoomNameFlag ? '':roomName}}</span>
+          <input type="text" model:value="{{roomName}}" wx:if="{{editRoomNameFlag}}"/>
+        </span>
+        <span class="businessName_box">商家店名：
+          <span>{{editBusinessNameFlag ? '':businessName}}</span>
+          <input type="text" model:value="{{businessName}}" wx:if="{{editBusinessNameFlag}}"/>
+        </span>
+      </view> 
+      <view class="button_box">
+          <view class="single_button" bind:tap="cancelEdit" wx:if="{{editBusinessNameFlag && editRoomNameFlag}}">
+            <span>取消修改</span>
+          </view>
+          <view class="single_button" bind:tap="submitEdit" wx:if="{{editBusinessNameFlag && editRoomNameFlag}}">
+            <span>确认修改</span>
+          </view>
+          <view class="single_button" bind:tap="callEdit"  wx:if="{{!editBusinessNameFlag && !editRoomNameFlag}}">
+            <span>修改直播间名和商家店名</span>
+          </view>
+      </view>
+    </view>
+  
+    <view class="status">
+      <view class="{{isLive == 1 ? 'liveStuatus startLive' :  'liveStuatus stopLive'}}">
+          <span>{{isLive == 1 ? "· 直播中":"· 未开播"}}</span>
+      </view>
+      <view class="button_box" >
+        <view class="button" bind:tap="reptLiveRoom" data-roomid="{{roomId}}" bind:tap="conLive">
+            <span>{{isLive == 0 ? '开启直播间':'关闭直播间'}}</span>
+        </view>
+        <view class="button" bind:tap="reptLiveRoom" data-roomid="{{roomId}}" bind:tap="reptLiveRoom">
+            <span>进入直播间</span>
+        </view>
+      </view>
+    </view>
+      <view class="share_later_box" wx:if="{{shareQrcodeUrl != '' && isLive}}">
+
+        <view class="qrcode_box" >
+          <view class="image">
+            <image src="{{shareQrcodeUrl}}"></image>
+            <view class="gifClass" >
+              <span>有效期为24小时</span>
+            </view>
+          </view>
+          <!-- <span>由于相关限制，无法在此小程序上推流</span>
+          <span style="font-weight: bold;">请搜索并打开【腾讯视频云】小程序</span>
+          <image src="//img.cdn.wepingon.cn/bsImg/liveTeach/t1.jpg" mode="widthFix" ></image>
+          <span style="font-weight: bold;">点击RTMP推流</span>
+          <image src="//img.cdn.wepingon.cn/bsImg/liveTeach/t2.jpg" mode="widthFix" ></image>
+          <span style="font-weight: bold;">扫码读取上方的二维码进行直播。</span>
+          <image src="//img.cdn.wepingon.cn/bsImg/liveTeach/t3.jpg" mode="widthFix" ></image> -->
+          <span style="font-weight: bold;border: 1px solid black;padding: 10px 0;border-radius: 20px;">或者<span class="copyLink_button" bind:tap="copyLinkButton">点此复制RTMP链接</span>到电脑直播软件上进行直播。</span>
+        </view>
+      </view>
+      
+  </view>
+</view>

@@ -1,0 +1,74 @@
+<view class="address_box">
+  <view class="add_backgroud" wx:if="{{editFlag}}">
+
+    <view class="addAddress_box">
+      <view class="title">
+        <span>修改地址</span>
+      </view>
+      <view class="buyer">
+        <span>收货人：</span>
+        <textarea model:value="{{editName}}"></textarea>
+      </view>
+      <view class="phoneNumber">
+        <span>联系电话：</span>
+        <textarea model:value="{{editNumber}}"></textarea>
+      </view>
+      <view class="content">
+        <picker bindchange="bindPickerChange"  range="{{array}}" mode="region">
+          <view class="picker">
+          省市：{{editArea}}
+          </view>
+        </picker>
+      </view>
+      <view class="detail">
+        <span>详细地址：</span>
+        <textarea model:value="{{editContent}}"></textarea>
+      </view>
+      <view class="fuinction_box">
+        <view class="single_button" bind:tap="cancelEditAddress">
+          <span>取消</span>
+        </view>
+        <view class="single_button" bind:tap="editConAddress">
+          <span>修改</span>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  
+
+  <view class="addAdress_box" bind:tap="reptAddAddress">
+    <image src="/images/addIcon.png"/>
+    <span>添加地址</span>
+  </view>
+  <view class="single_box" wx:for="{{addressList}}">
+      <view class="buyer">
+        <span>{{item.addressShipping}}</span>
+      </view>
+      <view class="number">
+        <span>{{item.addressPhoneNumber}}</span>
+      </view>
+      <view class="address">
+        <span class="text">{{item.addressProvince}} {{item.addressCity}} {{item.addressDistrict}}</span>
+        <span class="detail">{{item.addressDetail}}</span>
+      </view>
+      <view class="function_button">
+        <view class="default_box" bind:tap="setDefault" data-addressid="{{item.addressId}}">
+          <view class="{{item.isDefault ? 'click_button.active' : 'click_button'}}" ></view>
+          <view class="text">
+            <span>{{item.isDefault ? '收货地址':'设为收货地址'}}</span>
+          </view>
+        </view>
+        <view class="edit_box" bind:tap="editAddress" data-addressid="{{item.addressId}}">
+          <image src="/images/edit.png"/>
+          <span>修改地址</span>
+        </view>
+        <view class="delete_box" bind:tap="conAddress" data-conflag="delete" data-addressid="{{item.addressId}}">
+          <image src="/images/trash.png"/>
+          <span>删除地址</span>
+        </view>
+      </view>
+  </view>
+  
+
+</view>

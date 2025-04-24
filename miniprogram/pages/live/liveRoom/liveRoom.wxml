@@ -1,0 +1,91 @@
+<!-- <web-view src="https://video.cdn.wepingon.cn/live.html" ></web-view> -->
+<view class="liveHeader_box">
+  <view class="title_box">
+    <span>{{roomName}}</span>
+  </view>
+  <view class="{{isLiveFlag ? 'liveStatus_box starLive': 'liveStatus_box stopLive'}}">
+    <span>{{isLiveFlag ? '·直播中':'·未开播'}}</span>
+  </view>
+</view>
+<view class="video-box" wx:if="{{isLiveFlag}}"> 
+   <video id="myVideo" class="myVideo" 
+   src="{{liveRtmp}}" 
+   controls 
+   binderror="videoErrorCallback" 
+   show-center-play-btn='{{false}}'
+    enable-play-gesture="{{true}}" 
+    show-play-btn="{{true}}" 
+    auto-pause-if-navigate="{{true}}" 
+    show-fullscreen-btn="{{true}}" 
+    autoplay="{{true}}" 
+    enable-progress-gesture="{{false}}"
+    show-mute-btn="{{true}}" 
+    show-bottom-progress="{{false}}" 
+    is-live="{{true}}">
+  </video>
+</view>
+<view class="exchange_status_box" wx:if="{{isLiveFlag}}">
+  <view class="{{isTalkFlag ? 'e_button active': 'e_button' }}" bind:tap="changeTalk" data-tflag="1">
+    <span>聊天</span>
+  </view>
+  <view class="{{!isTalkFlag ? 'e_button active': 'e_button' }}" bind:tap="changeTalk" data-tflag="0">
+    <span>商品</span>
+  </view>
+</view>
+
+<view class="showGood_box" >
+  <view class="title_box starLive" wx:if="{{isLiveFlag && !isTalkFlag}}">
+    <span>·正在直播售卖的商品</span>
+  </view>
+  <view class="stopLive_box" wx:if="{{!isLiveFlag}}">
+    <span>该直播间尚未开启直播，稍后再来看看吧</span>
+  </view>
+  <view class="talk_box" wx:if="{{isLiveFlag && isTalkFlag}}">
+    <view class="gp_box">
+      <block wx:for="{{commentList}}">
+        <view class="{{item.myComment == 1 ? 'control_float myComment':'control_float'}}" >
+          <view class="{{item.myComment == 1 ? 'single_comment_box myComment' :'single_comment_box'}}">
+            <view class="userName">
+              <span>{{item.MbsystemName}}</span>
+            </view>
+            <view class="content">
+              <span>{{item.comment}}</span>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="submit_box">
+      <view class="input_box">
+        <textarea model:value="{{commentContent}}"></textarea>
+      </view>
+      <view class="submit_button" bind:tap="submitComment">
+        <view>发送</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="goods_box" wx:if="{{isLiveFlag && !isTalkFlag}}">
+    <view class="single_good" wx:for="{{goods_list}}" wx:if="{{item.isBuy == 1}}">
+      <view class="goods_status" >
+            <span style="{{(item.isBuy == 1 && item.inventory > 0 ) ?'':'color:red;'}}" >{{(item.isBuy == 1 && item.inventory > 0 ) ?'':'此商品目前已下架或缺货，暂时无法购买。'}}</span>
+        </view>
+      <view class="goods_sg_box"   >
+        <view class="img_box">
+          <image src='{{item.imgUrl}}'></image>
+        </view>
+        <view class="information_box">
+          <view class="title">
+            <span>{{item.goodTitle}}</span>
+            <span style="float: right;font-weight: 400; font-size: 14px;">库存：{{item.inventory}}</span>
+          </view>
+          <view class="amount_box">
+            <span class="amount"><span class="amountIcon_class">¥</span> {{item.amount}} </span>
+            <span class="orderButton" data-goodnum="{{item.goodNum}}" bind:tap="addCartButton">添加购物车</span>
+            <span class="orderButton" data-goodnum="{{item.goodNum}}" bind:tap="orderButton">下单</span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

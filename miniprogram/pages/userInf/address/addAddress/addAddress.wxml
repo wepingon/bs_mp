@@ -1,0 +1,30 @@
+<view class="addAddress_box">
+  <view class="buyer">
+    <span>收货人：</span>
+    <textarea model:value="{{buyer}}"></textarea>
+  </view>
+  <view class="phoneNumber">
+    <span>联系电话：</span>
+    <textarea model:value="{{phoneNumber}}"></textarea>
+  </view>
+  <view class="content">
+    <picker bindchange="bindPickerChange"  range="{{array}}" mode="region">
+      <view class="picker">
+       省市：{{area}}
+      </view>
+    </picker>
+  </view>
+  <view class="detail">
+    <span>详细地址：</span>
+    <textarea model:value="{{detail}}"></textarea>
+  </view>
+  <view class="fuinction_box">
+    <view class="single_button" bind:tap="clearAddress">
+      <span>清空</span>
+    </view>
+    <view class="single_button" bind:tap="submitAddress">
+      <span>添加</span>
+    </view>
+  </view>
+
+</view>

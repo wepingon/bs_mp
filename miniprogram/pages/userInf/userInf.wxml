@@ -1,0 +1,103 @@
+<!--pages/userInf/userInf.wxml-->
+<!-- <navigation-bar title="个人信息" back="{{false}}" color="black" background="#FFF"></navigation-bar> -->
+<view class="userInf_box" >
+  <view class="exchange_box" wx:if="{{loginFlag}}">
+    <view class="text">
+      <span>身份切换</span>
+    </view>
+    <view class="exchange_button">
+      <view class="{{isBuyerFlag ? 'box active':'box'}}" bind:tap="changeIdentify" data-bflag="1">
+        <span>我是买家</span>
+      </view>
+      <view class="{{!isBuyerFlag ? 'box active':'box'}}" bind:tap="changeIdentify" data-bflag="0" wx:if="{{dbIsSaler}}"> 
+        <span>我是卖家</span>
+      </view>
+    </view>
+  </view>
+  <view class="user_login_box" wx:if="{{!loginFlag}}" bind:tap="loginButton">
+    <!-- <view class="user_img_box">
+      <image src="{{userInfo.imageUrl}}"/>
+    </view> -->
+    <view class="login_text" >
+      <p>未登录</p>
+      <p style="color: grey;">点击登录账号-></p>
+    </view>
+  </view>
+  <view class="user_login_box" wx:if="{{loginFlag}}">
+    <!-- <view class="user_img_box">
+      <image src="{{userInfo.imageUrl}}"/>
+    </view> -->
+    <view class="login_text">
+      <p class="welcome_text">欢迎你，{{userInfo.username}}</p>
+      <view class="{{isBuyerFlag ? 'address_box':'address_box vis'}}" bind:tap="reptAddress" >
+        <image src="/images/addressIcon.png"/>
+        <span >收货地址</span>
+      </view>
+    </view>
+  </view>
+  <view class="account_box">
+    <view class="banner_box" wx:if="{{loginFlag && isBuyerFlag}}">
+      <view class="button_box">
+        <view class="single_box" bind:tap="reptWaitPay">
+          <view class="number_box">
+            <span>{{notpayNumber}}</span>
+          </view>
+          <image src="/images/waitPayIcon.png"/>
+          <span>待付款</span>
+        </view>
+        <view class="single_box" bind:tap="reptWaitShip">
+          <view class="number_box">
+            <span>{{successNumber}}</span>
+          </view>
+          <image src="/images/waitReIcon.png" />
+          <span>待收货</span>
+        </view>
+        <!-- <view class="single_box" bind:tap="reptMyCommentList">
+          <image src="/images/saleLaterIcon.png"/>
+          <span>售后订单</span>
+        </view> -->
+        <view class="single_box" bind:tap="reptAllOrder">
+          <image src="/images/allOrderIcon.png"/>
+          <span>全部订单</span>
+        </view>
+      </view>
+    </view>
+
+    <view class="banner_box" wx:if="{{loginFlag && !isBuyerFlag}}">
+      <view class="button_box">
+        <view class="single_box" bind:tap="reptManaLiveRoom">
+          <image src="/images/liveRoomManIcon.png"/>
+          <span>直播间管理</span>
+        </view>
+        <view class="single_box" bind:tap="reptManaOrder">
+          <image src="/images/allOrderIcon.png"/>
+          <span>订单管理</span>
+        </view>
+      </view>
+    </view>
+    <view class="function_box" wx:if="{{loginFlag}}">
+      <!-- <view class="button_box">
+        <image src="/images/myHomePage.png"/>
+          <p>我的主页</p>
+      </view> -->
+<!-- 
+      <view class="button_box" bind:tap="reptLive">
+        <image src="/images/liveIcon.png"/>
+          <p>直播</p>
+      </view> -->
+
+      <view class="button_box" bind:tap="exitLoginButton">
+        <image src="/images/exitLogin.png"/>
+          <p>退出登录</p>
+      </view>
+      
+      <!-- <view class="button_box" bind:tap="testPage">
+        <image src="/images/exitLogin.png"/>
+          <p>测试</p>
+      </view> -->
+    </view>
+  </view>
+  <view class="footer_box">
+    <span>-Version {{versionText}}-</span>
+  </view>
+</view>
